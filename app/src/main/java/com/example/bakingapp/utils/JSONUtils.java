@@ -39,6 +39,7 @@ public class JSONUtils {
 
             Recipe recipe = new Recipe(id, image, name, servings);
             long recipe_id = db.recipeDao().insertRecipe(recipe);
+            Log.d(LOG,"Recipe ID"+recipe_id);
             recipeList.add(recipe);
 
             JSONArray ingredients = object.getJSONArray("ingredients");
@@ -51,14 +52,17 @@ public class JSONUtils {
                 Measure measure_obj = new Measure(measure);
                 Material material_obj = new Material(material);
                 long measure_id = db.measureDao().insertMeasure(measure_obj);
+                Log.d(LOG,"Measure ID"+measure_id);
                 long material_id = db.materialDao().insertMaterial(material_obj);
+                Log.d(LOG,"Material ID"+material_id);
 
                 Ingredient ingredient_obj = new Ingredient(quantity, measure_id, material_id);
                 long ingredient_id = db.ingredientDao().insertIngredient(ingredient_obj);
+                Log.d(LOG,"Ingredient ID"+ingredient_id);
 
                 // Insert a row in reference table
                 RecipeIngredientCrossRef ref = new RecipeIngredientCrossRef(recipe_id, ingredient_id);
-                db.recipeIngredientCrossRefDao().insertReference(ref);
+                db.recipeIngredientCrossRefDao().insertRecipeIngredientCrossRef(ref);
             }
 
             JSONArray steps = object.getJSONArray("steps");
@@ -71,7 +75,8 @@ public class JSONUtils {
                 String thumbnailURL = step.getString("thumbnailURL");
 
                 Step step_obj = new Step(stepId, shortDescription, description, videoURL, thumbnailURL, recipe_id);
-                db.stepDao().insertStep(step_obj);
+                long step_id = db.stepDao().insertStep(step_obj);
+                Log.d(LOG,"Step ID"+step_id);
             }
         }
 

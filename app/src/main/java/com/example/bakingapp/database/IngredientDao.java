@@ -30,7 +30,7 @@ public interface IngredientDao {
 
     @Transaction
     @Query("SELECT * FROM ingredient")
-    List<IngredientWithRecipes> getIngredientWithRecipes();
+    List<IngredientWithRecipes> getIngredientsWithRecipes();
 
     @Transaction
     @Query("SELECT * FROM ingredient WHERE ingredient_id = :ingredient_id")

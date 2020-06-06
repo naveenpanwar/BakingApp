@@ -10,7 +10,8 @@ import androidx.room.PrimaryKey;
 public class Measure {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int id;
+    @ColumnInfo(name = "measure_id")
+    private int measureId;
 
     private String name;
 
@@ -18,8 +19,12 @@ public class Measure {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getMeasureId() {
+        return measureId;
+    }
+
+    public void setMeasureId(int measureId) {
+        this.measureId = measureId;
     }
 
     public String getName() {

@@ -4,22 +4,22 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Relation;
 
-@Entity(primaryKeys = {"id","ingredient_id"})
+@Entity(primaryKeys = {"recipe_id","ingredient_id"})
 public class RecipeIngredientCrossRef {
-    public long id;
+    public long recipe_id;
     public long ingredient_id;
 
-    public RecipeIngredientCrossRef(long id, long ingredient_id) {
-        this.id = id;
+    public RecipeIngredientCrossRef(long recipe_id, long ingredient_id) {
+        this.recipe_id = recipe_id;
         this.ingredient_id = ingredient_id;
     }
 
     public long getId() {
-        return id;
+        return recipe_id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.recipe_id = id;
     }
 
     public long getIngredientId() {

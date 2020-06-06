@@ -29,9 +29,9 @@ public interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM recipe")
-    List<RecipeWithIngredients> getRecipeWithIngredients();
+    List<RecipeWithIngredients> getRecipesWithIngredients();
 
     @Transaction
-    @Query("SELECT * FROM recipe WHERE id = :recipe_id")
+    @Query("SELECT * FROM recipe WHERE recipe_id = :recipe_id")
     RecipeWithIngredients getIngredients(long recipe_id);
 }

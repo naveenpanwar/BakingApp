@@ -11,7 +11,8 @@ import androidx.room.PrimaryKey;
 public class Material {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int id;
+    @ColumnInfo(name = "material_id")
+    private int materialId;
 
     private String name;
 
@@ -19,8 +20,12 @@ public class Material {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(int materialId) {
+        this.materialId = materialId;
     }
 
     public String getName() {

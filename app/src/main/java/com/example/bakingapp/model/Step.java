@@ -10,10 +10,11 @@ import androidx.room.PrimaryKey;
 public class Step {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    int id;
-
     @ColumnInfo(name = "step_id")
     int stepId;
+
+    @ColumnInfo(name = "step_number")
+    int stepNumber;
 
     @ColumnInfo(name = "short_description")
     String shortDescription;
@@ -26,24 +27,33 @@ public class Step {
     @ColumnInfo(name = "thumbnail_url")
     String thumbnailURL;
 
-    @ColumnInfo(name = "recipe_id")
-    long recipeId;
+    @ColumnInfo(name = "recipe_step_id")
+    long recipeStepId;
 
-    public Step(int stepId, String shortDescription, String description, String videoURL, String thumbnailURL, long recipeId) {
-        this.stepId = stepId;
+    public Step(int stepNumber, String shortDescription, String description, String videoURL,
+                String thumbnailURL, long recipeStepId) {
+        this.stepNumber = stepNumber;
         this.shortDescription = shortDescription;
         this.description = description;
         this.videoURL = videoURL;
         this.thumbnailURL = thumbnailURL;
-        this.recipeId = recipeId;
+        this.recipeStepId = recipeStepId;
     }
 
     public int getStepId() {
         return stepId;
     }
 
-    public void setStepId(int stepId) {
-        this.stepId = stepId;
+    public void setStepId(int id) {
+        this.stepId = id;
+    }
+
+    public int getStepNumber() {
+        return stepNumber;
+    }
+
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
     }
 
     public String getShortDescription() {
@@ -78,11 +88,11 @@ public class Step {
         this.thumbnailURL = thumbnailURL;
     }
 
-    public long getRecipeId() {
-        return recipeId;
+    public long getRecipeStepId() {
+        return recipeStepId;
     }
 
-    public void setRecipeId(long recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipeStepId(long recipeStepId) {
+        this.recipeStepId = recipeStepId;
     }
 }

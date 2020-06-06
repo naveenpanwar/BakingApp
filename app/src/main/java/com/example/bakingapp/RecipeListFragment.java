@@ -37,8 +37,11 @@ public class RecipeListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_recipe_list, container,
+                false);
         final Context context = getActivity();
 
         mRecipeListRecyclerView = rootView.findViewById(R.id.rv_recipe_list);
@@ -63,7 +66,6 @@ public class RecipeListFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void setRecipeList(Context context) {
-        // TODO: create function to populate adapter with list of recipe
         String data = null;
         try {
             data = NetworkUtils.getRecipeData();

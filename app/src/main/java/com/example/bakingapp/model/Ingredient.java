@@ -10,7 +10,7 @@ public class Ingredient {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "ingredient_id")
-    private int id;
+    private int ingredientId;
 
     private double quantity;
 
@@ -26,8 +26,12 @@ public class Ingredient {
         this.materialId = materialId;
     }
 
-    public int getId() {
-        return id;
+    public int getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(int ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
     public double getQuantity() {
@@ -36,5 +40,21 @@ public class Ingredient {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public long getMeasureId() {
+        return measureId;
+    }
+
+    public void setMeasureId(long measureId) {
+        this.measureId = measureId;
+    }
+
+    public long getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(long materialId) {
+        this.materialId = materialId;
     }
 }

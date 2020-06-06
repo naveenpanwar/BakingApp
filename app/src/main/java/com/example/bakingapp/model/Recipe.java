@@ -1,6 +1,7 @@
 package com.example.bakingapp.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,48 +9,49 @@ import androidx.room.PrimaryKey;
 public class Recipe {
     @PrimaryKey
     @NonNull
-    private int id;
+    @ColumnInfo(name = "recipe_id")
+    private int recipeId;
 
     private String image;
     private String name;
     private int servings;
 
-    public Recipe(int id, String image, String name, int servings) {
-        this.id = id;
+    public Recipe(int recipeId, String image, String name, int servings) {
+        this.recipeId = recipeId;
         this.image = image;
         this.name = name;
         this.servings = servings;
     }
 
-    public int getId() {
-        return this.id;
+    public int getRecipeId() {
+        return this.recipeId;
     }
 
-    public String getImage() {
-        return this.image;
-    }
-
-    public String getName() {
-        return this.name;
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 
     public int getServings() {
         return this.servings;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public String getImage() {
+        return this.image;
     }
 
     public void setImage(String image) {
         this.image = image;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getName() {
+        return this.name;
     }
 
-    public void setServings(int servings) {
-        this.servings = servings;
+    public void setName(String name) {
+        this.name = name;
     }
 }
