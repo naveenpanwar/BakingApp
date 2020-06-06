@@ -1,5 +1,6 @@
 package com.example.bakingapp.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Dao
 public interface RecipeDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insertRecipe(Recipe recipe);
 
     @Insert
@@ -29,7 +30,10 @@ public interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM recipe")
-    List<RecipeWithIngredients> getRecipesWithIngredients();
+    LiveData<List<RecipeWithIngredients>> getRecipesWithIngredients();
+
+    @Query("SELECT * FROM recipe")
+    LiveData<List<Recipe>> getRecipes();
 
     @Transaction
     @Query("SELECT * FROM recipe WHERE recipe_id = :recipe_id")

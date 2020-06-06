@@ -12,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakingapp.model.Recipe;
+import com.example.bakingapp.model.RecipeViewModel;
+import com.example.bakingapp.model.RecipeWithIngredients;
 import com.example.bakingapp.utils.JSONUtils;
 import com.example.bakingapp.utils.NetworkUtils;
 import com.example.bakingapp.utils.RecipeExecutors;
@@ -25,6 +29,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
+import java.util.Observable;
 
 public class RecipeListFragment extends Fragment {
     private final static String LOG = RecipeListFragment.class.getSimpleName();
@@ -56,37 +62,47 @@ public class RecipeListFragment extends Fragment {
             RecipeExecutors.getInstance().networkIO().execute(new Runnable() {
                 @Override
                 public void run() {
-                    setRecipeList(context);
+                    populateRecipeDB(context);
                 }
             });
         }
+
+        populateUI();
 
         return rootView;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void setRecipeList(Context context) {
+    private void populateRecipeDB(Context context) {
         String data = null;
+
         try {
             data = NetworkUtils.getRecipeData();
         } catch (IOException e) {
             Log.d(LOG, "IOException");
             e.printStackTrace();
         }
+
         if( data != null && !data.equals("") ) {
             try {
                 mRecipeAdapter.setRecipeList(JSONUtils.populateRecipeDBFromJSON(data, context));
-                RecipeExecutors.getInstance().mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        mRecipeAdapter.notifyDataSetChanged();
-                    }
-                });
             } catch (JSONException | ParseException e) {
                 e.printStackTrace();
             }
         } else {
             Log.d(LOG, "JSON is null or Empty string");
         }
+    }
+
+    private void populateUI() {
+        RecipeViewModel recipeViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                getActivity().getApplication()).create(RecipeViewModel.class);
+        recipeViewModel.getRecipes().observe(this, new Observer<List<Recipe>>() {
+            @Override
+            public void onChanged(List<Recipe> recipes) {
+                mRecipeAdapter.setRecipeList(recipes);
+                mRecipeAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

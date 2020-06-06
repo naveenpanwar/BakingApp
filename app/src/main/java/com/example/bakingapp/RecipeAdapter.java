@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakingapp.model.Recipe;
+import com.example.bakingapp.model.RecipeWithIngredients;
 
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder> {
     private List<Recipe> mRecipeList;
+    private List<RecipeWithIngredients> mRecipeWithIngredientsList;
+
     @NonNull
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +31,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
 
     public void setRecipeList(List<Recipe> recipes) {
         mRecipeList = recipes;
+    }
+
+    public void setRecipeWithIngredientsList(List<RecipeWithIngredients> recipeWithIngredientsList) {
+        mRecipeWithIngredientsList = recipeWithIngredientsList;
     }
 
     @Override
