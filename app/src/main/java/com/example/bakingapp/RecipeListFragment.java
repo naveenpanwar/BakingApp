@@ -1,5 +1,6 @@
 package com.example.bakingapp;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class RecipeListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        final Context context = getActivity();
 
         mRecipeListRecyclerView = rootView.findViewById(R.id.rv_recipe_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -51,7 +53,7 @@ public class RecipeListFragment extends Fragment {
             RecipeExecutors.getInstance().networkIO().execute(new Runnable() {
                 @Override
                 public void run() {
-                    setRecipeList();
+                    setRecipeList(context);
                 }
             });
         }
@@ -60,7 +62,7 @@ public class RecipeListFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void setRecipeList() {
+    private void setRecipeList(Context context) {
         // TODO: create function to populate adapter with list of recipe
         String data = null;
         try {
@@ -71,7 +73,7 @@ public class RecipeListFragment extends Fragment {
         }
         if( data != null && !data.equals("") ) {
             try {
-                mRecipeAdapter.setRecipeList(JSONUtils.getRecipeListFromJSON(data));
+                mRecipeAdapter.setRecipeList(JSONUtils.populateRecipeDBFromJSON(data, context));
                 RecipeExecutors.getInstance().mainThread().execute(new Runnable() {
                     @Override
                     public void run() {

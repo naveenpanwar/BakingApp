@@ -11,7 +11,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class NetworkUtils {
-    final private static String RECIPE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    final private static String RECIPE_URL =
+            "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     final private static OkHttpClient client = new OkHttpClient();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

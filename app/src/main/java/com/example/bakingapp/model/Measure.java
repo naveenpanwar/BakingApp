@@ -3,9 +3,10 @@ package com.example.bakingapp.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "measure")
+@Entity(tableName = "measure", indices = {@Index(value = {"name"}, unique = true)})
 public class Measure {
     @PrimaryKey(autoGenerate = true)
     @NonNull

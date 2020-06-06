@@ -12,7 +12,7 @@ public class Ingredient {
     @ColumnInfo(name = "ingredient_id")
     private int id;
 
-    private int quantity;
+    private double quantity;
 
     @ColumnInfo(name = "measure_id")
     private long measureId;
@@ -20,7 +20,7 @@ public class Ingredient {
     @ColumnInfo(name = "material_id")
     private long materialId;
 
-    public Ingredient(int quantity, long measureId, long materialId) {
+    public Ingredient(double quantity, long measureId, long materialId) {
         this.quantity = quantity;
         this.measureId = measureId;
         this.materialId = materialId;
@@ -30,11 +30,11 @@ public class Ingredient {
         return id;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 }

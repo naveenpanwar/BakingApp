@@ -14,5 +14,19 @@ public class RecipeIngredientCrossRef {
         this.ingredient_id = ingredient_id;
     }
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIngredientId() {
+        return ingredient_id;
+    }
+
+    public void setIngredientId(long ingredient_id) {
+        this.ingredient_id = ingredient_id;
+    }
 }
